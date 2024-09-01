@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
         try {
-            log.info("Inside signup with request: {}", requestMap);
+            System.out.println("Inside signup with request: "+ "{" +requestMap + "}");
 
             if (validate(requestMap)) {
                 User user = userDao.findByEmailId(requestMap.get("email"));

@@ -2,6 +2,7 @@ package com.inn.cafe.serviceImpl;
 
 import com.inn.cafe.Constants.CafeConstants;
 import com.inn.cafe.Dao.UserDao;
+import com.inn.cafe.JWT.CustomerUsersDetailService;
 import com.inn.cafe.Pojo.User;
 import com.inn.cafe.service.UserService;
 import com.inn.cafe.utils.CafeUtils;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Objects;
@@ -20,11 +23,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
         try {
-            System.out.println("Inside signup with request: "+ "{" +requestMap + "}");
+            log.info("Inside signup with request: {}",requestMap );
 
             if (validate(requestMap)) {
                 User user = userDao.findByEmailId(requestMap.get("email"));
@@ -57,9 +61,9 @@ public class UserServiceImpl implements UserService {
     {
         User user = new User();
         user.setName(requestMap.get("name"));
-        user.setContactNumber("contactNumber");
-        user.setEmail("email");
-        user.setPassword("password");
+        user.setContactNumber(requestMap.get("contactNumber"));
+        user.setEmail(requestMap.get("email"));
+        user.setPassword(requestMap.get("password"));
         user.setStatus("false");
         user.setRole("user");
         return user;

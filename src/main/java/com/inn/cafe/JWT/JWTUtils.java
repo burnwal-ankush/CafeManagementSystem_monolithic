@@ -16,57 +16,55 @@ import java.util.function.Function;
 @Service
 public class JWTUtils {
 
-    private String secret = "btechdays";
+    private final Key secret;
 
-    public String extractUsername(String token)
-    {
-        return extractClaims(token,Claims::getSubject);
+    public JWTUtils() {
+        this.secret = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
-    public Date extractExpiration(String token)
-    {
-        return extractClaims(token,Claims::getExpiration);
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
     }
 
-    public <T> T extractClaims(String token, Function<Claims,T> claimsResolver)
-    {
-        Claims claims = extractAllClaims(token);
+    public Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    private Boolean isTokenExpired(String token)
-    {
+    private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails)
-    {
-        final String userName = extractUsername(token);
-        return(userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public Boolean validateToken(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    private String createToken(Map<String,Object> claims, String subject) {
+    private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*10))
-                .signWith(SignatureAlgorithm.HS256,secret)
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token valid for 10 hours
+                .signWith(secret, SignatureAlgorithm.HS256) // signWith using the key and algorithm
                 .compact();
     }
 
-    public String generateToken(String username, String role){
-        Map<String,Object> claims = new HashMap<>();
+    public String generateToken(String username, String role) {
+        Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
-        return createToken(claims,username);
+        return createToken(claims, username);
     }
 
-    public Claims extractAllClaims(String token)
-    {
-        Key key = Keys.hmacShaKeyFor(secret.getBytes());
-        return Jwts.parser().setSigningKey(key)
-                .build().parseClaimsJws(token).getBody();
+    Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
-
-
 }

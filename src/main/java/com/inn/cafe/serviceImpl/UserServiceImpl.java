@@ -4,9 +4,11 @@ import com.inn.cafe.Constants.CafeConstants;
 import com.inn.cafe.Dao.UserDao;
 import com.inn.cafe.JWT.CustomerUsersDetailService;
 import com.inn.cafe.JWT.JWTUtils;
+import com.inn.cafe.JWT.JwtFilter;
 import com.inn.cafe.Pojo.User;
 import com.inn.cafe.service.UserService;
 import com.inn.cafe.utils.CafeUtils;
+import com.inn.cafe.wrapper.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -18,9 +20,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Service
@@ -34,6 +35,8 @@ public class UserServiceImpl implements UserService {
     CustomerUsersDetailService customerUsersDetailService;
     @Autowired
     JWTUtils jwtUtils;
+    @Autowired
+    JwtFilter jwtFilter;
 
     Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -101,5 +104,24 @@ public class UserServiceImpl implements UserService {
             log.error("Exception during login: ", e);
         }
         return CafeUtils.getResponseEntity("Wrong Credentials!!!", HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public ResponseEntity<List<UserWrapper>> getAllUsers() {
+        try{
+            if(jwtFilter.isAdmin())
+            {
+
+            }
+            else
+            {
+                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

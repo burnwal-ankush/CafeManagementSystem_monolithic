@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         return CafeUtils.getResponseEntity("Wrong Credentials!!!", HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/getAllUsers")
+    @Override
     public ResponseEntity<List<UserWrapper>> getAllUsers() {
         try {
             if (jwtFilter.isAdmin()) {
@@ -117,11 +117,11 @@ public class UserServiceImpl implements UserService {
                 return new ResponseEntity<>(users, HttpStatus.OK);
             } else {
                 log.info("User is not admin, hence can't return any users");
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             log.error("Error fetching users", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

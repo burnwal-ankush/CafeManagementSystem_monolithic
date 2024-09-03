@@ -23,4 +23,7 @@ public interface UserRest {
     @GetMapping(path="/get")
     public ResponseEntity<List<UserWrapper>> getAllUsers();
 
+    @PostMapping(path="/update")
+    public ResponseEntity<String> update(@RequestBody(required = true)Map<String,String> requestMap);
+
 }

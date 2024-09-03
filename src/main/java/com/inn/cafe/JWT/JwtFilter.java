@@ -72,7 +72,7 @@ public class JwtFilter extends OncePerRequestFilter {
         return "user".equalsIgnoreCase((String) claims.get("role"));
     }
 
-    public String currentUser()
+    public String getCurrentUser()
     {
         return userName;
     }

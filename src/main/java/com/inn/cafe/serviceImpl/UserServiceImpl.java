@@ -20,10 +20,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Service
@@ -155,15 +153,48 @@ public class UserServiceImpl implements UserService {
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<String> checkToken() {
+        return CafeUtils.getResponseEntity("true",HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<String> changePassword(Map<String, String> requestMap) {
+        try{
+            User userObj = userDao.findByEmail(jwtFilter.getCurrentUser());
+            if(userObj != null)
+            {
+                if(userObj.getPassword().equals(requestMap.get("oldPassword")) && !((requestMap.get("oldPassword")).equals(requestMap.get("newPassword"))))
+                {
+                    userObj.setPassword(requestMap.get("newPassword"));
+                    userDao.save(userObj);
+                    return CafeUtils.getResponseEntity("Password updated successfully", HttpStatus.OK);
+                }
+                else if(requestMap.get("oldPassword").equals(requestMap.get("newPassword"))) {
+                    return CafeUtils.getResponseEntity("New password cannot be same as Old password", HttpStatus.BAD_REQUEST);
+                }
+                else {
+                     return CafeUtils.getResponseEntity("Incorrect Old Password", HttpStatus.BAD_REQUEST);
+                }
+            }
+            return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private void sendMailToAllAdmin(String status, String user, List<String> allAdmin) {
 
-        allAdmin.remove(jwtFilter.currentUser());
+        allAdmin.remove(jwtFilter.getCurrentUser());
         if(status!=null && status.equalsIgnoreCase("true"))
         {
-            emailUtils.sendSimpleMessage(jwtFilter.currentUser(),"ACCOUNT APPROVED", "USER :- " +user + "\n is approved by \nADMIN:-" +jwtFilter.currentUser() ,allAdmin);
+            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(),"ACCOUNT APPROVED", "USER :- " +user + "\n is approved by \nADMIN:-" +jwtFilter.getCurrentUser() ,allAdmin);
         }
         else {
-            emailUtils.sendSimpleMessage(jwtFilter.currentUser(),"ACCOUNT DISABLED", "USER :- " +user + "\n is disabled by \nADMIN:-" +jwtFilter.currentUser() ,allAdmin);
+            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(),"ACCOUNT DISABLED", "USER :- " +user + "\n is disabled by \nADMIN:-" +jwtFilter.getCurrentUser() ,allAdmin);
         }
     }
 

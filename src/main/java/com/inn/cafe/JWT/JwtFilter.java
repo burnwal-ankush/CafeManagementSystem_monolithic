@@ -33,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
             filterChain.doFilter(httpServletRequest,httpServletResponse);
         }
         else {
-            String authorizedHeader = httpServletRequest.getHeader("Authorized");
+            String authorizedHeader = httpServletRequest.getHeader("Authorization");
             String token = null;
 
             if(authorizedHeader!= null && authorizedHeader.startsWith("Bearer "))

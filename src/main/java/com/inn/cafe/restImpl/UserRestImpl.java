@@ -42,15 +42,20 @@ public class UserRestImpl implements UserRest {
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @Override
     public ResponseEntity<List<UserWrapper>> getAllUsers() {
-        try{
-            userService.getAllUsers();
-        }
-        catch (Exception e)
-        {
+        try {
+            // Capture the result from the service call
+            return userService.getAllUsers();
+
+            // Return the result with an OK status if everything went fine
+            //return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (Exception e) {
             e.printStackTrace();
+
+            // Return an empty list with INTERNAL_SERVER_ERROR status if there's an exception
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<List<UserWrapper>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
 }

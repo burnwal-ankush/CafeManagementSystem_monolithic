@@ -7,8 +7,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+@NamedQuery(name = "User.getAllUsers", query="select new com.inn.cafe.wrapper.UserWrapper(u.id,u.name,u.contactNumber,u.email,u.status) from User u where u.role = 'user'")
 @NamedQuery(name = "User.findByEmailId", query="select u from User u where email =:email")
-@NamedQuery(name = "User.getAllUsers", query="select new com.inn.cafe.wrapper.UserWrapper(u.id,u.name,u.email,u.contactNumber,u.status) from User u where u.role = 'user'")
 @Entity
 @DynamicInsert
 @DynamicUpdate
@@ -23,7 +24,7 @@ public class User implements Serializable {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "contactNumber")
+    @Column(name = "contact_number")
     private String contactNumber;
     @Column(name = "email")
     private String email;

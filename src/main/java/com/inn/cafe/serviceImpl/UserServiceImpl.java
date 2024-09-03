@@ -19,6 +19,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -106,22 +107,22 @@ public class UserServiceImpl implements UserService {
         return CafeUtils.getResponseEntity("Wrong Credentials!!!", HttpStatus.BAD_REQUEST);
     }
 
-    @Override
+    @GetMapping("/getAllUsers")
     public ResponseEntity<List<UserWrapper>> getAllUsers() {
-        try{
-            if(jwtFilter.isAdmin())
-            {
-
+        try {
+            if (jwtFilter.isAdmin()) {
+                log.info("User is admin, hence returning users");
+                List<UserWrapper> users = userDao.getAllUsers();
+                log.info("Successfully got {} users",users.size());
+                return new ResponseEntity<>(users, HttpStatus.OK);
+            } else {
+                log.info("User is not admin, hence can't return any users");
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
-            else
-            {
-                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
-            }
+        } catch (Exception e) {
+            log.error("Error fetching users", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

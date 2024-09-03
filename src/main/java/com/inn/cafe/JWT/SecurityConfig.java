@@ -35,16 +35,7 @@ public class SecurityConfig {
                 )
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .formLogin(formLogin ->
-                        formLogin
-                                .defaultSuccessUrl("/home")
-                                .permitAll()
-                )
-                .logout(logout ->
-                        logout.permitAll()
-                )
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                ).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

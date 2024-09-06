@@ -1,12 +1,23 @@
 package com.inn.cafe.utils;
 
+import com.google.common.base.Strings;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class CafeUtils {
 
-    private CafeUtils()
-    {
+    private CafeUtils() {
 
     }
 
@@ -14,6 +25,26 @@ public class CafeUtils {
         return new ResponseEntity<String>("{\"message\":\"" + responseMessage + "\"}", httpStatus);
     }
 
+    public static String getUUID() {
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+        String formattedDateTime = dateTime.format(formatter);
+        return "Bill-" + formattedDateTime;
+    }
+
+    public static JSONArray getJsonArrayFromString(String data) throws JSONException {
+        JSONArray jsonArray = new JSONArray(data);
+        return jsonArray;
+    }
+
+    public static Map<String, Object> getMapFromJson(String data) {
+        if(!Strings.isNullOrEmpty(data)) {
+            return new Gson().fromJson(data, new TypeToken<Map<String, Object>>() {
+            }.getType());
+        }
+        return new HashMap<>();
+    }
 
 
 }

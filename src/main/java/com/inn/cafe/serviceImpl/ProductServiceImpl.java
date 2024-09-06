@@ -98,6 +98,31 @@ public class ProductServiceImpl implements ProductService {
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<String> deleteProduct(Integer id) {
+        try{
+            if (jwtFilter.isAdmin()) {
+                Optional<Product> optionalProduct = productDao.findById(id);
+                if(optionalProduct.isPresent())
+                {
+                    productDao.deleteById(id);
+                    return CafeUtils.getResponseEntity("Product deleted successfully",HttpStatus.OK);
+                }
+                else {
+                    return CafeUtils.getResponseEntity("Product with that id doesn't exist", HttpStatus.BAD_REQUEST);
+                }
+            }
+            else {
+                return CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS,HttpStatus.UNAUTHORIZED);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return  CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
     private Product getProductFromRequestMap(Map<String, String> requestMap, boolean isUpdate) {
         Category category = new Category();

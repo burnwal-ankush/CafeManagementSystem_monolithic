@@ -10,8 +10,8 @@ public class ProductWrapper {
     Integer customerId;
     String customerName;
 
-    public ProductWrapper()
-    {}
+    public ProductWrapper() {
+    }
 
     public ProductWrapper(Integer id, String name, String description, Integer price, String status, Integer customerId, String customerName) {
         this.id = id;
@@ -22,6 +22,19 @@ public class ProductWrapper {
         this.customerId = customerId;
         this.customerName = customerName;
     }
+
+    public ProductWrapper(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public ProductWrapper(Integer id, String name, String description, Integer price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
 
     public Integer getId() {
         return id;

@@ -21,4 +21,14 @@ public interface ProductRest {
 
     @PostMapping(path="/deleteProduct/{id}")
     ResponseEntity<String> deleteProduct(@PathVariable Integer id);
+
+    @PostMapping(path="/updateStatus")
+    ResponseEntity<String> updateStatus(@RequestBody(required = true) Map<String,String> requestMap);
+
+    @GetMapping(path="/getByCategory/{id}")
+    ResponseEntity<List<ProductWrapper>> getByCategory(@PathVariable Integer id);
+
+    @GetMapping(path="/getProductById/{id}")
+    ResponseEntity<List<ProductWrapper>> getProductById(@PathVariable Integer id);
+
 }

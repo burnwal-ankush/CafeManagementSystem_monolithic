@@ -12,6 +12,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pdfbox.io.IOUtils;
 import org.json.JSONArray;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -21,9 +22,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.stream.Stream;
@@ -109,6 +113,56 @@ public class BillServiceImpl implements BillService {
         }
     }
 
+    @Override
+    public ResponseEntity<List<Bill>> getBills() {
+        try {
+            List<Bill> bills = new ArrayList<>();
+            if (jwtFilter.isAdmin()) {
+                bills = billDao.getAllBills();
+            } else {
+                bills = billDao.getBillByUserName(jwtFilter.getCurrentUser());
+            }
+            return new ResponseEntity<>(bills, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @Override
+    public ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap) {
+        log.info("Inside getPdf : requestMap {}", requestMap);
+        try {
+            byte[] bytes = new byte[0];
+            if(!requestMap.containsKey("uuid") && validateBillRequestMap(requestMap))
+                return new ResponseEntity<>(bytes, HttpStatus.BAD_REQUEST);
+            String filePath = CafeConstants.STORE_LOCATION +"\\" + (String)requestMap.get("uuid") + ".pdf";
+            if(CafeUtils.isFileExists(filePath))
+            {
+                bytes = getByteArray(filePath);
+                return new ResponseEntity<>(bytes,HttpStatus.OK);
+            }
+            else {
+                requestMap.put("isGenerate",false);
+                generateBill(requestMap);
+                getByteArray(filePath);
+                return new ResponseEntity<>(bytes,HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private byte[] getByteArray(String filePath) throws Exception{
+        File initial = new File(filePath);
+        InputStream targetStream = new FileInputStream(initial);
+        byte[] bytes = IOUtils.toByteArray(targetStream);
+        targetStream.close();
+        return bytes;
+    }
+
 
     private void addRows(PdfPTable table, Map<String, Object> data) {
         table.addCell((String) data.get("name"));
@@ -189,6 +243,6 @@ public class BillServiceImpl implements BillService {
         return (requestMap.containsKey("name") && requestMap.containsKey("contactNumber")
                 && requestMap.containsKey("email") && requestMap.containsKey("paymentMethod")
                 && requestMap.containsKey("productDetails") && requestMap.containsKey("totalAmount"));
-                //&& requestMap.containsKey("billCreatedDttm"));
+        //&& requestMap.containsKey("billCreatedDttm"));
     }
 }

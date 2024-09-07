@@ -30,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -153,6 +154,33 @@ public class BillServiceImpl implements BillService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public ResponseEntity<String> deleteBill(Integer id) {
+        try
+        {
+           if(jwtFilter.isAdmin())
+           {
+               Optional<Bill> billOptional = billDao.findById(id);
+               if(billOptional.isPresent())
+               {
+                   billDao.deleteById(id);
+                   return CafeUtils.getResponseEntity("Bill deleted successfully!!!", HttpStatus.OK);
+               }
+               else {
+                   return CafeUtils.getResponseEntity("Bill with that id does not exist", HttpStatus.OK);
+               }
+           }
+           else {
+               return CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS,HttpStatus.UNAUTHORIZED);
+           }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private byte[] getByteArray(String filePath) throws Exception{

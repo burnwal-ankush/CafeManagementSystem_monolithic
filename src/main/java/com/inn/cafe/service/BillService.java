@@ -2,6 +2,7 @@ package com.inn.cafe.service;
 
 
 import com.inn.cafe.Pojo.Bill;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface BillService {
     ResponseEntity<List<Bill>> getBills();
 
     ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap);
+
+    ResponseEntity<String> deleteBill(@Param("id") Integer id);
 }

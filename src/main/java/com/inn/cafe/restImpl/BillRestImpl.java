@@ -57,4 +57,16 @@ public class BillRestImpl implements BillRest {
         }
         return null;//CafeUtils.getResponseEntity(new Byte[],HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<String> deleteBill(Integer id) {
+        try{
+            return billService.deleteBill(id);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

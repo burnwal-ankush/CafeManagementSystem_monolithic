@@ -1,0 +1,202 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< com.inn:cafe >----------------------------
+[INFO] Building Cafe Management System 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.0:run (default-cli) > test-compile @ cafe >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ cafe ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ cafe ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ cafe ---
+[INFO] Copying 2 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ cafe ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.4.0:run (default-cli) < test-compile @ cafe <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.0:run (default-cli) @ cafe ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.0)
+
+2025-08-17T18:01:26.177+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : Starting CafeManagementSystemApplication using Java 24.0.2 with PID 54279 (/Users/burnanku/Documents/CafeManagementSystem/CafeManagementSystem_monolithic/Backend/target/classes started by burnanku in /Users/burnanku/Documents/CafeManagementSystem/CafeManagementSystem_monolithic/Backend)
+2025-08-17T18:01:26.178+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-08-17T18:01:26.200+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-17T18:01:26.200+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-17T18:01:26.428+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-17T18:01:26.451+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 4 JPA repository interfaces.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/burnanku/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.33/tomcat-embed-core-10.1.33.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2025-08-17T18:01:26.649+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-17T18:01:26.655+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-17T18:01:26.655+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-08-17T18:01:26.667+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-17T18:01:26.668+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 468 ms
+2025-08-17T18:01:26.678+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-17T18:01:26.753+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-08-17T18:01:26.754+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-17T18:01:26.759+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-17T18:01:26.796+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-17T18:01:26.812+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.2.Final
+2025-08-17T18:01:26.821+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-17T18:01:26.903+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-17T18:01:26.919+05:30  WARN 54279 --- [Cafe Management System] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-17T18:01:26.923+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-17T18:01:27.180+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-17T18:01:27.386+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T18:01:27.530+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customerUsersDetailService
+2025-08-17T18:01:27.543+05:30  WARN 54279 --- [Cafe Management System] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-17T18:01:27.701+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-17T18:01:27.714+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-17T18:01:27.717+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : Started CafeManagementSystemApplication in 1.69 seconds (process running for 1.854)
+2025-08-17T18:01:42.811+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-17T18:01:42.811+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-17T18:01:42.811+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-08-17T18:01:42.838+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-1] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=test, email=test@test.com, contactNumber=123, password=test}
+2025-08-17T18:01:42.844+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-1] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-17T18:03:25.875+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-9] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T18:03:37.511+05:30  INFO 54279 --- [Cafe Management System] [io-8080-exec-10] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T18:03:57.785+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-1] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T18:04:31.368+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-2] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, email=test@example.com, contactNumber=1234567890, password=password123}
+2025-08-17T18:35:35.822+05:30  WARN 54279 --- [Cafe Management System] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m8s572ms).
+2025-08-17T18:55:19.439+05:30  WARN 54279 --- [Cafe Management System] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m43s620ms).
+2025-08-17T19:11:38.734+05:30  WARN 54279 --- [Cafe Management System] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m49s276ms).
+2025-08-17T19:29:34.948+05:30  WARN 54279 --- [Cafe Management System] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m56s215ms).
+2025-08-17T19:36:05.757+05:30  WARN 54279 --- [Cafe Management System] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m30s808ms).
+2025-08-17T19:50:23.066+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-4] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T20:06:11.421+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-5] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T20:06:12.283+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-6] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T20:06:13.042+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-7] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T20:06:13.539+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-8] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T20:23:21.463+05:30  INFO 54279 --- [Cafe Management System] [io-8080-exec-10] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T20:23:50.801+05:30  INFO 54279 --- [Cafe Management System] [nio-8080-exec-1] c.inn.cafe.serviceImpl.UserServiceImpl   : Inside signup with request: {name=Test User, contactNumber=1234567890, email=test@test.com, password=test}
+2025-08-17T20:41:50.940+05:30  INFO 54279 --- [Cafe Management System] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 41 class path changes (0 additions, 0 deletions, 41 modifications)
+2025-08-17T20:41:50.944+05:30  INFO 54279 --- [Cafe Management System] [       Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-17T20:41:51.952+05:30  INFO 54279 --- [Cafe Management System] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-17T20:41:51.956+05:30  INFO 54279 --- [Cafe Management System] [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T20:41:51.963+05:30  WARN 54279 --- [Cafe Management System] [       Thread-5] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-08-17T20:41:51.963+05:30  INFO 54279 --- [Cafe Management System] [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-17T20:41:51.964+05:30  INFO 54279 --- [Cafe Management System] [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.0)
+
+2025-08-17T20:41:52.001+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : Starting CafeManagementSystemApplication using Java 24.0.2 with PID 54279 (/Users/burnanku/Documents/CafeManagementSystem/CafeManagementSystem_monolithic/Backend/target/classes started by burnanku in /Users/burnanku/Documents/CafeManagementSystem/CafeManagementSystem_monolithic/Backend)
+2025-08-17T20:41:52.002+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-08-17T20:41:52.071+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-17T20:41:52.079+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 4 JPA repository interfaces.
+2025-08-17T20:41:52.132+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-17T20:41:52.133+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-17T20:41:52.133+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-08-17T20:41:52.138+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-17T20:41:52.138+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 135 ms
+2025-08-17T20:41:52.144+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-08-17T20:41:52.145+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn40: url=jdbc:h2:mem:testdb user=SA
+2025-08-17T20:41:52.145+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-08-17T20:41:52.145+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-17T20:41:52.157+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-17T20:41:52.159+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-17T20:41:52.162+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-17T20:41:52.163+05:30  WARN 54279 --- [Cafe Management System] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-17T20:41:52.163+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-17T20:41:52.193+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-17T20:41:52.198+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T20:41:52.259+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customerUsersDetailService
+2025-08-17T20:41:52.266+05:30  WARN 54279 --- [Cafe Management System] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-17T20:41:52.322+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-17T20:41:52.327+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-17T20:41:52.329+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : Started CafeManagementSystemApplication in 0.336 seconds (process running for 5807.968)
+2025-08-17T20:41:52.330+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-08-17T20:41:59.580+05:30  INFO 54279 --- [Cafe Management System] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 41 class path changes (0 additions, 0 deletions, 41 modifications)
+2025-08-17T20:41:59.581+05:30  INFO 54279 --- [Cafe Management System] [       Thread-7] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-17T20:41:59.801+05:30  INFO 54279 --- [Cafe Management System] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-17T20:41:59.802+05:30  INFO 54279 --- [Cafe Management System] [       Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T20:41:59.803+05:30  WARN 54279 --- [Cafe Management System] [       Thread-7] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-08-17T20:41:59.803+05:30  INFO 54279 --- [Cafe Management System] [       Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-08-17T20:41:59.803+05:30  INFO 54279 --- [Cafe Management System] [       Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.0)
+
+2025-08-17T20:41:59.838+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : Starting CafeManagementSystemApplication using Java 24.0.2 with PID 54279 (/Users/burnanku/Documents/CafeManagementSystem/CafeManagementSystem_monolithic/Backend/target/classes started by burnanku in /Users/burnanku/Documents/CafeManagementSystem/CafeManagementSystem_monolithic/Backend)
+2025-08-17T20:41:59.838+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-08-17T20:41:59.883+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-17T20:41:59.890+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 4 JPA repository interfaces.
+2025-08-17T20:41:59.927+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-17T20:41:59.927+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-17T20:41:59.927+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2025-08-17T20:41:59.931+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-17T20:41:59.931+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 93 ms
+2025-08-17T20:41:59.935+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-08-17T20:41:59.936+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection conn50: url=jdbc:h2:mem:testdb user=SA
+2025-08-17T20:41:59.936+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-08-17T20:41:59.936+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-08-17T20:41:59.945+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-17T20:41:59.946+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-17T20:41:59.949+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-17T20:41:59.950+05:30  WARN 54279 --- [Cafe Management System] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-17T20:41:59.950+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-17T20:41:59.980+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-17T20:41:59.985+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-17T20:42:00.045+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customerUsersDetailService
+2025-08-17T20:42:00.051+05:30  WARN 54279 --- [Cafe Management System] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-17T20:42:00.098+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-17T20:42:00.102+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-17T20:42:00.104+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] c.i.c.CafeManagementSystemApplication    : Started CafeManagementSystemApplication in 0.274 seconds (process running for 5815.743)
+2025-08-17T20:42:00.104+05:30  INFO 54279 --- [Cafe Management System] [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged

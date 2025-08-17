@@ -6,8 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,10 +18,12 @@ import java.util.List;
 @Service
 public class EmailUtils {
 
+    private static final Logger log = LoggerFactory.getLogger(EmailUtils.class);
+
     @Autowired
     JavaMailSender emailSender;
 
-    Logger log = LoggerFactory.getLogger(EmailUtils.class);
+
 
     public void sendSimpleMessage(String to, String subject, String text, List<String> list)
     {

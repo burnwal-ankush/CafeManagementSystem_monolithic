@@ -1,7 +1,7 @@
 package com.inn.cafe.restImpl;
 
 import com.inn.cafe.Constants.CafeConstants;
-import com.inn.cafe.JWT.JWTUtils;
+
 import com.inn.cafe.Pojo.Category;
 import com.inn.cafe.rest.CategoryRest;
 import com.inn.cafe.service.CategoryService;

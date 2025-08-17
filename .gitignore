@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Security ###
+application-local.properties
+application-prod.properties
+.env
+*.key
+*.pem

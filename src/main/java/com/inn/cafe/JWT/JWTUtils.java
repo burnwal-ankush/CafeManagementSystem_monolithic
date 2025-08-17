@@ -2,12 +2,13 @@ package com.inn.cafe.JWT;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +17,10 @@ import java.util.function.Function;
 @Service
 public class JWTUtils {
 
-    private final Key secret;
+    private final SecretKey secret;
 
-    public JWTUtils() {
-        this.secret = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    public JWTUtils(@Value("${jwt.secret:cafeManagementSystemSecretKeyForJWTTokenGeneration}") String secretKey) {
+        this.secret = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
     public String extractUsername(String token) {
@@ -46,11 +47,11 @@ public class JWTUtils {
 
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token valid for 10 hours
-                .signWith(secret, SignatureAlgorithm.HS256) // signWith using the key and algorithm
+                .claims(claims)
+                .subject(subject)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token valid for 10 hours
+                .signWith(secret)
                 .compact();
     }
 
@@ -62,9 +63,9 @@ public class JWTUtils {
 
     Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(secret)
+                .verifyWith(secret)
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }

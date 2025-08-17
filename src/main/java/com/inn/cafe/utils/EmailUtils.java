@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.awt.SystemColor.text;
-
 @Slf4j
 @Service
 public class EmailUtils {

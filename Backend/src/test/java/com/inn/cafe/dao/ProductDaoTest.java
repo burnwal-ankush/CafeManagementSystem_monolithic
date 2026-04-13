@@ -30,7 +30,7 @@ class ProductDaoTest {
 
         Product product = new Product();
         product.setName("Test Product");
-        product.setPrice(100);
+        product.setPrice(100.0);
         product.setDescription("Test Description");
         product.setStatus("true");
         product.setCategory(category);
@@ -49,7 +49,7 @@ class ProductDaoTest {
 
         Product product = new Product();
         product.setName("Test Product");
-        product.setPrice(100);
+        product.setPrice(100.0);
         product.setDescription("Test Description");
         product.setStatus("true");
         product.setCategory(category);

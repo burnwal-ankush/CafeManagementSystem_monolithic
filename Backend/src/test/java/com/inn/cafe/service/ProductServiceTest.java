@@ -48,7 +48,7 @@ class ProductServiceTest {
         testProduct.setId(1);
         testProduct.setName("Coffee");
         testProduct.setDescription("Hot coffee");
-        testProduct.setPrice(100);
+        testProduct.setPrice(100.0);
         testProduct.setStatus("true");
         testProduct.setCategory(testCategory);
     }
@@ -74,7 +74,7 @@ class ProductServiceTest {
     @Test
     void getAllProduct_ReturnsProductList() {
         List<ProductWrapper> mockProducts = Arrays.asList(
-            new ProductWrapper(1, "Coffee", "Hot coffee", 100, "true", 1, "Beverages")
+            new ProductWrapper(1, "Coffee", "Hot coffee", 100.0, "true", 1, "Beverages")
         );
 
         when(productDao.getAllProduct()).thenReturn(mockProducts);

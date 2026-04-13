@@ -26,4 +26,10 @@ public interface CustomerRest {
 
     @GetMapping(path = "/allRatings")
     ResponseEntity<List<Rating>> getAllRatings();
+
+    @GetMapping(path = "/ratings/bill/{billId}")
+    ResponseEntity<List<Rating>> getRatingsByBill(@PathVariable Integer billId);
+
+    @GetMapping(path = "/ratings/product/{productId}")
+    ResponseEntity<List<Rating>> getRatingsByProduct(@PathVariable Integer productId);
 }

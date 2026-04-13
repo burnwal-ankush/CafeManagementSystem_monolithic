@@ -11,4 +11,6 @@ import java.util.List;
 public interface RatingDao extends JpaRepository<Rating, Integer> {
     List<Rating> getByEmail(@Param("email") String email);
     List<Rating> getAll();
+    List<Rating> getByBillId(@Param("billId") Integer billId);
+    List<Rating> getByProductId(@Param("productId") Integer productId);
 }

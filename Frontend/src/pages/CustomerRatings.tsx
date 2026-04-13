@@ -170,6 +170,18 @@ export default function CustomerRatings() {
                             {r.comment && (
                                 <p style={{ fontSize: 14, color: 'var(--medium-roast)', lineHeight: 1.6 }}>{r.comment}</p>
                             )}
+                            {(r.reviewType === 'product' || r.reviewType === 'bill') && (
+                                <div style={{ marginTop: 6, display: 'flex', gap: 6 }}>
+                                    <span style={{
+                                        fontSize: 11, padding: '2px 8px', borderRadius: 8,
+                                        background: r.reviewType === 'product' ? 'rgba(155,89,182,0.1)' : 'rgba(52,152,219,0.1)',
+                                        color: r.reviewType === 'product' ? '#9B59B6' : '#3498DB',
+                                        fontWeight: 600,
+                                    }}>
+                                        {r.reviewType === 'product' ? `Product: ${r.productName}` : 'Order Review'}
+                                    </span>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

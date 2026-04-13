@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 @NamedQuery(name = "Rating.getByEmail", query = "select r from Rating r where r.customerEmail = :email order by r.createdAt desc")
 @NamedQuery(name = "Rating.getAll", query = "select r from Rating r order by r.createdAt desc")
+@NamedQuery(name = "Rating.getByBillId", query = "select r from Rating r where r.billId = :billId order by r.createdAt desc")
+@NamedQuery(name = "Rating.getByProductId", query = "select r from Rating r where r.productId = :productId order by r.createdAt desc")
 @Entity
 @DynamicInsert
 @DynamicUpdate
@@ -35,6 +37,18 @@ public class Rating implements Serializable {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "bill_id")
+    private Integer billId;
+
+    @Column(name = "product_id")
+    private Integer productId;
+
+    @Column(name = "product_name")
+    private String productName;
+
+    @Column(name = "review_type")
+    private String reviewType; // "bill", "product", or "general"
+
     public Rating() {}
 
     public Integer getId() { return id; }
@@ -49,4 +63,12 @@ public class Rating implements Serializable {
     public void setComment(String comment) { this.comment = comment; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public Integer getBillId() { return billId; }
+    public void setBillId(Integer billId) { this.billId = billId; }
+    public Integer getProductId() { return productId; }
+    public void setProductId(Integer productId) { this.productId = productId; }
+    public String getProductName() { return productName; }
+    public void setProductName(String productName) { this.productName = productName; }
+    public String getReviewType() { return reviewType; }
+    public void setReviewType(String reviewType) { this.reviewType = reviewType; }
 }

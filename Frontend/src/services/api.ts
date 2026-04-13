@@ -68,5 +68,7 @@ export const getMenu = () => API.get('/customer/menu');
 export const addRating = (data: Record<string, string>) => API.post('/customer/rate', data);
 export const getMyRatings = () => API.get('/customer/myRatings');
 export const getAllRatings = () => API.get('/customer/allRatings');
+export const getRatingsByBill = (billId: number) => API.get(`/customer/ratings/bill/${billId}`);
+export const getRatingsByProduct = (productId: number) => API.get(`/customer/ratings/product/${productId}`);
 
 export default API;

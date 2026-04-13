@@ -52,7 +52,6 @@ public class CustomerRestImpl implements CustomerRest {
     public ResponseEntity<List<ProductWrapper>> getMenu() {
         try {
             List<ProductWrapper> products = productDao.getAllProduct();
-            // Filter to only active products
             List<ProductWrapper> active = products.stream()
                     .filter(p -> "true".equalsIgnoreCase(p.getStatus()))
                     .toList();
@@ -73,11 +72,22 @@ public class CustomerRestImpl implements CustomerRest {
             rating.setCustomerEmail(email);
             rating.setCustomerName(user != null ? user.getName() : "Customer");
             rating.setScore(Integer.parseInt(requestMap.get("score")));
-            rating.setComment(requestMap.get("comment"));
+            rating.setComment(requestMap.getOrDefault("comment", ""));
             rating.setCreatedAt(LocalDateTime.now());
-            ratingDao.save(rating);
 
-            return CafeUtils.getResponseEntity("Rating submitted successfully!", HttpStatus.OK);
+            String type = requestMap.getOrDefault("reviewType", "general");
+            rating.setReviewType(type);
+
+            if ("bill".equals(type) && requestMap.containsKey("billId")) {
+                rating.setBillId(Integer.parseInt(requestMap.get("billId")));
+            }
+            if ("product".equals(type) && requestMap.containsKey("productId")) {
+                rating.setProductId(Integer.parseInt(requestMap.get("productId")));
+                rating.setProductName(requestMap.getOrDefault("productName", ""));
+            }
+
+            ratingDao.save(rating);
+            return CafeUtils.getResponseEntity("Review submitted successfully!", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -99,6 +109,26 @@ public class CustomerRestImpl implements CustomerRest {
     public ResponseEntity<List<Rating>> getAllRatings() {
         try {
             return new ResponseEntity<>(ratingDao.getAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<List<Rating>> getRatingsByBill(Integer billId) {
+        try {
+            return new ResponseEntity<>(ratingDao.getByBillId(billId), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<List<Rating>> getRatingsByProduct(Integer productId) {
+        try {
+            return new ResponseEntity<>(ratingDao.getByProductId(productId), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);

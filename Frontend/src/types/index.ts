@@ -61,4 +61,8 @@ export interface Rating {
   score: number;
   comment: string;
   createdAt: string;
+  billId: number | null;
+  productId: number | null;
+  productName: string | null;
+  reviewType: string;
 }

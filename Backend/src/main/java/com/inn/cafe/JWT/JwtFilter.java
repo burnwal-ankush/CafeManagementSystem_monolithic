@@ -29,23 +29,34 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
-        if(httpServletRequest.getServletPath().matches("/user/signup|/user/login/|user/forgotPassword")){
+        if(httpServletRequest.getServletPath().matches("/user/signup|/user/login|/user/forgotPassword")){
             filterChain.doFilter(httpServletRequest,httpServletResponse);
         }
         else {
             String authorizedHeader = httpServletRequest.getHeader("Authorization");
             String token = null;
+            String currentUserName = null;
+            Claims currentClaims = null;
 
             if(authorizedHeader!= null && authorizedHeader.startsWith("Bearer "))
             {
                 token = authorizedHeader.substring(7);
-                userName = jwtUtils.extractUsername(token);
-                claims = jwtUtils.extractAllClaims(token);
+                try {
+                    currentUserName = jwtUtils.extractUsername(token);
+                    currentClaims = jwtUtils.extractAllClaims(token);
+                } catch (Exception e) {
+                    // Invalid token — continue without authentication
+                }
             }
 
-            if(userName!=null && SecurityContextHolder.getContext().getAuthentication()==null)
+            if(currentUserName != null) {
+                userName = currentUserName;
+                claims = currentClaims;
+            }
+
+            if(currentUserName!=null && SecurityContextHolder.getContext().getAuthentication()==null)
             {
-                UserDetails userDetails = customerUsersDetailService.loadUserByUsername(userName);
+                UserDetails userDetails = customerUsersDetailService.loadUserByUsername(currentUserName);
                 if(jwtUtils.validateToken(token,userDetails))
                 {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =

@@ -9,8 +9,10 @@ import java.util.Objects;
 
 
 @NamedQuery(name = "User.getAllUsers", query="select new com.inn.cafe.wrapper.UserWrapper(u.id,u.name,u.contactNumber,u.email,u.status) from User u where u.role = 'user'")
+@NamedQuery(name = "User.getAllNonAdminUsers", query="select new com.inn.cafe.wrapper.UserWrapper(u.id,u.name,u.contactNumber,u.email,u.status,u.role) from User u where u.role <> 'admin'")
 @NamedQuery(name = "User.findByEmailId", query="select u from User u where email =:email")
 @NamedQuery(name = "User.updateStatus", query="update User u set u.status=:status where u.id=:id")
+@NamedQuery(name = "User.updateRole", query="update User u set u.role=:role where u.id=:id")
 @NamedQuery(name = "User.getAllAdmin", query="select u.email from User u where u.role = 'admin'")
 @Entity
 @DynamicInsert

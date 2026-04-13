@@ -7,6 +7,7 @@ public class UserWrapper {
     private String contactNumber;
     private String email;
     private String status;
+    private String role;
 
     public UserWrapper() {
     }
@@ -17,6 +18,15 @@ public class UserWrapper {
         this.contactNumber = contactNumber;
         this.email = email;
         this.status = status;
+    }
+
+    public UserWrapper(Integer id, String name, String contactNumber, String email, String status, String role) {
+        this.id = id;
+        this.name = name;
+        this.contactNumber = contactNumber;
+        this.email = email;
+        this.status = status;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -57,5 +67,13 @@ public class UserWrapper {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

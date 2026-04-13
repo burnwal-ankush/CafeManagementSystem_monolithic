@@ -23,6 +23,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.HashMap;
 
 @Slf4j
 @Service
@@ -40,6 +41,9 @@ public class UserServiceImpl implements UserService {
     JwtFilter jwtFilter;
     @Autowired
     EmailUtils emailUtils;
+
+    @Autowired
+    org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -78,9 +82,10 @@ public class UserServiceImpl implements UserService {
         user.setName(requestMap.get("name"));
         user.setContactNumber(requestMap.get("contactNumber"));
         user.setEmail(requestMap.get("email"));
-        user.setPassword(requestMap.get("password"));
-        user.setStatus("false");
-        user.setRole("user");
+        user.setPassword(passwordEncoder.encode(requestMap.get("password")));
+        user.setStatus("true");
+        // Public signup always creates customers; staff/admin created by admin
+        user.setRole("customer");
         return user;
     }
 
@@ -114,7 +119,7 @@ public class UserServiceImpl implements UserService {
         try {
             if (jwtFilter.isAdmin()) {
                 log.info("User is admin, hence returning users");
-                List<UserWrapper> users = userDao.getAllUsers();
+                List<UserWrapper> users = userDao.getAllNonAdminUsers();
                 log.info("Successfully got {} users",users.size());
                 return new ResponseEntity<>(users, HttpStatus.OK);
             } else {
@@ -165,9 +170,9 @@ public class UserServiceImpl implements UserService {
             User userObj = userDao.findByEmail(jwtFilter.getCurrentUser());
             if(userObj != null)
             {
-                if(userObj.getPassword().equals(requestMap.get("oldPassword")) && !((requestMap.get("oldPassword")).equals(requestMap.get("newPassword"))))
+                if(passwordEncoder.matches(requestMap.get("oldPassword"), userObj.getPassword()) && !((requestMap.get("oldPassword")).equals(requestMap.get("newPassword"))))
                 {
-                    userObj.setPassword(requestMap.get("newPassword"));
+                    userObj.setPassword(passwordEncoder.encode(requestMap.get("newPassword")));
                     userDao.save(userObj);
                     return CafeUtils.getResponseEntity("Password updated successfully", HttpStatus.OK);
                 }
@@ -216,5 +221,95 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public ResponseEntity<String> addStaff(Map<String, String> requestMap) {
+        try {
+            if (jwtFilter.isAdmin()) {
+                if (validate(requestMap)) {
+                    User existing = userDao.findByEmailId(requestMap.get("email"));
+                    if (Objects.isNull(existing)) {
+                        User user = new User();
+                        user.setName(requestMap.get("name"));
+                        user.setContactNumber(requestMap.get("contactNumber"));
+                        user.setEmail(requestMap.get("email"));
+                        user.setPassword(passwordEncoder.encode(requestMap.get("password")));
+                        user.setStatus("true");
+                        user.setRole("user");
+                        userDao.save(user);
+                        return CafeUtils.getResponseEntity("Staff member added successfully!", HttpStatus.OK);
+                    } else {
+                        return CafeUtils.getResponseEntity("Email already exists!", HttpStatus.BAD_REQUEST);
+                    }
+                } else {
+                    return CafeUtils.getResponseEntity(CafeConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
+                }
+            } else {
+                return CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> updateRole(Map<String, String> requestMap) {
+        try {
+            if (jwtFilter.isAdmin()) {
+                Integer id = Integer.parseInt(requestMap.get("id"));
+                String role = requestMap.get("role");
+                if ("user".equals(role) || "customer".equals(role)) {
+                    Optional<User> optionalUser = userDao.findById(id);
+                    if (optionalUser.isPresent()) {
+                        userDao.updateRole(role, id);
+                        return CafeUtils.getResponseEntity("Role updated successfully!", HttpStatus.OK);
+                    } else {
+                        return CafeUtils.getResponseEntity("User not found", HttpStatus.BAD_REQUEST);
+                    }
+                } else {
+                    return CafeUtils.getResponseEntity("Invalid role", HttpStatus.BAD_REQUEST);
+                }
+            } else {
+                return CafeUtils.getResponseEntity(CafeConstants.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, String>> getProfile() {
+        try {
+            User user = userDao.findByEmail(jwtFilter.getCurrentUser());
+            if (user != null) {
+                Map<String, String> profile = new HashMap<>();
+                profile.put("name", user.getName());
+                profile.put("email", user.getEmail());
+                profile.put("contactNumber", user.getContactNumber());
+                profile.put("role", user.getRole());
+                return new ResponseEntity<>(profile, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new HashMap<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> updateProfile(Map<String, String> requestMap) {
+        try {
+            User user = userDao.findByEmail(jwtFilter.getCurrentUser());
+            if (user != null) {
+                if (requestMap.containsKey("name")) user.setName(requestMap.get("name"));
+                if (requestMap.containsKey("contactNumber")) user.setContactNumber(requestMap.get("contactNumber"));
+                userDao.save(user);
+                return CafeUtils.getResponseEntity("Profile updated successfully!", HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

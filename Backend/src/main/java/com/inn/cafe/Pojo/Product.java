@@ -30,14 +30,14 @@ public class Product implements Serializable {
     @Column(name = "description")
     private String description;
     @Column(name = "price")
-    private Integer price;
+    private Double price;
     @Column(name = "status")
     private String status;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, Category category, String description, Integer price, String status) {
+    public Product(Integer id, String name, Category category, String description, Double price, String status) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -78,11 +78,11 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

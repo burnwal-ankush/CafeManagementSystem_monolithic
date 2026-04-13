@@ -255,7 +255,7 @@ public class BillServiceImpl implements BillService {
             bill.setPaymentMethod((String) requestMap.get("paymentMethod"));
             bill.setBillCreatedDttm(LocalDateTime.now());
             bill.setProductDetail((String) requestMap.get("productDetails"));
-            bill.setTotal(Integer.parseInt(requestMap.get("totalAmount").toString()));
+            bill.setTotal(Double.parseDouble(requestMap.get("totalAmount").toString()));
             String currentUser = jwtFilter.getCurrentUser();
             System.out.println("Current User: " + currentUser);
             bill.setCreatedBy(currentUser);

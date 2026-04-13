@@ -37,7 +37,7 @@ public class Bill implements Serializable {
     private String paymentMethod;
 
     @Column(name = "total")
-    private Integer total;
+    private Double total;
 
     @Column(name = "product_detail", columnDefinition = "TEXT")
     private String productDetail;
@@ -51,7 +51,7 @@ public class Bill implements Serializable {
     public Bill() {
     }
 
-    public Bill(Integer id, String name, String uuid, String email, String contactNumber, String paymentMethod, Integer total, String productDetail, String createdBy, LocalDateTime billCreatedDttm) {
+    public Bill(Integer id, String name, String uuid, String email, String contactNumber, String paymentMethod, Double total, String productDetail, String createdBy, LocalDateTime billCreatedDttm) {
         this.id = id;
         this.name = name;
         this.uuid = uuid;
@@ -112,11 +112,11 @@ public class Bill implements Serializable {
         this.paymentMethod = paymentMethod;
     }
 
-    public Integer getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 

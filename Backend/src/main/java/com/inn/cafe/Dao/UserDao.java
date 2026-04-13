@@ -15,9 +15,15 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     List<UserWrapper> getAllUsers();
 
+    List<UserWrapper> getAllNonAdminUsers();
+
     @Transactional
     @Modifying
     Integer updateStatus(@Param("status") String status, @Param("id") Integer id);
+
+    @Transactional
+    @Modifying
+    Integer updateRole(@Param("role") String role, @Param("id") Integer id);
 
     List<String> getAllAdmin();
 

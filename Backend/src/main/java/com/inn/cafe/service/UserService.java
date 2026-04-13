@@ -21,4 +21,12 @@ public interface UserService {
     ResponseEntity<String> changePassword(Map<String, String> requestMap);
 
     ResponseEntity<String> forgotPassword(Map<String, String> requestMap);
+
+    ResponseEntity<String> addStaff(Map<String, String> requestMap);
+
+    ResponseEntity<String> updateRole(Map<String, String> requestMap);
+
+    ResponseEntity<Map<String, String>> getProfile();
+
+    ResponseEntity<String> updateProfile(Map<String, String> requestMap);
 }

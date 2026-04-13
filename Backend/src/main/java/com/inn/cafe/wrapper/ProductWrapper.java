@@ -5,7 +5,7 @@ public class ProductWrapper {
     Integer id;
     String name;
     String description;
-    Integer price;
+    Double price;
     String status;
     Integer customerId;
     String customerName;
@@ -13,7 +13,7 @@ public class ProductWrapper {
     public ProductWrapper() {
     }
 
-    public ProductWrapper(Integer id, String name, String description, Integer price, String status, Integer customerId, String customerName) {
+    public ProductWrapper(Integer id, String name, String description, Double price, String status, Integer customerId, String customerName) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -28,7 +28,7 @@ public class ProductWrapper {
         this.name = name;
     }
 
-    public ProductWrapper(Integer id, String name, String description, Integer price) {
+    public ProductWrapper(Integer id, String name, String description, Double price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -60,11 +60,11 @@ public class ProductWrapper {
         this.description = description;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

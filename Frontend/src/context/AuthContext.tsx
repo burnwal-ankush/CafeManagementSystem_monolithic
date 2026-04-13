@@ -37,29 +37,32 @@ function isTokenExpired(token: string): boolean {
     return Date.now() >= payload.exp * 1000;
 }
 
+// Use sessionStorage so each browser tab has its own independent session.
+// This lets you be logged in as admin in one tab and customer in another.
 function getInitialState() {
-    const token = localStorage.getItem('token');
-    if (!token) return { token: null, role: null };
+    const token = sessionStorage.getItem('token');
+    if (!token) return { token: null, role: null, userName: null };
     if (isTokenExpired(token)) {
-        localStorage.removeItem('token');
-        return { token: null, role: null };
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('userName');
+        return { token: null, role: null, userName: null };
     }
     const payload = parseJwt(token);
-    return { token, role: payload?.role || null };
+    return { token, role: payload?.role || null, userName: sessionStorage.getItem('userName') };
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const initial = getInitialState();
     const [token, setToken] = useState<string | null>(initial.token);
     const [role, setRole] = useState<string | null>(initial.role);
-    const [userName, setUserName] = useState<string | null>(localStorage.getItem('userName'));
+    const [userName, setUserName] = useState<string | null>(initial.userName);
 
     const fetchProfile = useCallback(() => {
         if (token) {
             getProfile().then((res) => {
                 const name = res.data?.name || null;
                 setUserName(name);
-                if (name) localStorage.setItem('userName', name);
+                if (name) sessionStorage.setItem('userName', name);
             }).catch(() => { });
         }
     }, [token]);
@@ -71,8 +74,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     setToken(null);
                     setRole(null);
                     setUserName(null);
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('userName');
+                    sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('userName');
                 }
             });
             fetchProfile();
@@ -80,15 +83,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, [token, fetchProfile]);
 
     const loginUser = (newToken: string) => {
-        localStorage.setItem('token', newToken);
+        sessionStorage.setItem('token', newToken);
         setToken(newToken);
         const payload = parseJwt(newToken);
         setRole(payload?.role || null);
     };
 
     const logout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userName');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('userName');
         setToken(null);
         setRole(null);
         setUserName(null);

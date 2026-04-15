@@ -115,15 +115,15 @@ export default function Categories() {
                 </div>
             )}
 
-            <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Edit Category' : 'New Category'}>
-                <form onSubmit={handleSubmit}>
-                    <Input label="Category Name" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Hot Beverages" required />
-                    <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end', marginTop: 8 }}>
-                        <Button variant="secondary" type="button" onClick={() => setModalOpen(false)}>Cancel</Button>
-                        <Button type="submit">{editing ? 'Update' : 'Add'}</Button>
-                    </div>
-                </form>
-            </Modal>
+                <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Edit Category' : 'New Category'}>
+                    <form onSubmit={handleSubmit}>
+                        <Input label="Category Name" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Hot Beverages" required />
+                        <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end', marginTop: 8 }}>
+                            <Button variant="secondary" type="button" onClick={() => setModalOpen(false)}>Cancel</Button>
+                            <Button type="submit">{editing ? 'Update' : 'Add'}</Button>
+                        </div>
+                    </form>
+                </Modal>
         </div>
     );
 }

@@ -282,3 +282,106 @@ describe('Signup - all field focus/blur', async () => {
         fireEvent.blur(pw);
     });
 });
+
+// ===== parseJwt catch branch (line 30) =====
+describe('parseJwt exported', () => {
+    it('returns null for completely invalid token', async () => {
+        const { parseJwt } = await import('../context/AuthContext');
+        expect(parseJwt('garbage')).toBeNull();
+        expect(parseJwt('')).toBeNull();
+        expect(parseJwt('a.!!!invalid-base64.c')).toBeNull();
+    });
+
+    it('parses valid token', async () => {
+        const { parseJwt } = await import('../context/AuthContext');
+        const header = btoa(JSON.stringify({ alg: 'HS256' }));
+        const payload = btoa(JSON.stringify({ sub: 'test', role: 'admin' }));
+        const result = parseJwt(`${header}.${payload}.sig`);
+        expect(result).toEqual({ sub: 'test', role: 'admin' });
+    });
+});
+
+// ===== Force modal rendering for all remaining pages =====
+describe('CustomerMenu - force modal render', async () => {
+    const { default: CustomerMenu } = await import('../pages/CustomerMenu');
+    it('renders review modal content', async () => {
+        m.getMenu.mockResolvedValue({ data: [{ id: 1, name: 'X', description: 'Y', price: 1, status: 'true', customerId: 1, customerName: 'C' }] });
+        render(<W><CustomerMenu /></W>);
+        await waitFor(() => expect(screen.getByText('X')).toBeInTheDocument());
+        fireEvent.click(screen.getByText('Review'));
+        await waitFor(() => {
+            expect(screen.getByText('Review: X')).toBeInTheDocument();
+            expect(screen.getByPlaceholderText('Share your thoughts...')).toBeInTheDocument();
+            expect(screen.getByText('Submit')).toBeInTheDocument();
+        });
+    });
+});
+
+describe('CustomerOrders - force modal render', async () => {
+    const { default: CustomerOrders } = await import('../pages/CustomerOrders');
+    it('renders review modal with product type', async () => {
+        m.getMyOrders.mockResolvedValue({ data: [{ id: 1, uuid: 'U', paymentMethod: 'Cash', total: 5, productDetail: '[{"id":1,"name":"Z","quantity":1,"total":5}]', billCreatedDttm: null }] });
+        render(<W><CustomerOrders /></W>);
+        await waitFor(() => expect(screen.getByText('Rate')).toBeInTheDocument());
+        fireEvent.click(screen.getByText('Rate'));
+        await waitFor(() => {
+            expect(screen.getByText('Review: Z')).toBeInTheDocument();
+            expect(screen.getByPlaceholderText('Share your thoughts...')).toBeInTheDocument();
+        });
+    });
+});
+
+describe('Orders - force modal render', async () => {
+    const { default: Orders } = await import('../pages/Orders');
+    it('renders new order modal with all fields', async () => {
+        m.getCategories.mockResolvedValue({ data: [{ id: 1, name: 'B' }] });
+        render(<W><Orders /></W>);
+        await waitFor(() => { });
+        fireEvent.click(screen.getByText('New Order'));
+        await waitFor(() => {
+            expect(screen.getByPlaceholderText('John Doe')).toBeInTheDocument();
+            expect(screen.getByText('Place Order')).toBeInTheDocument();
+            expect(screen.getByText('Payment Method')).toBeInTheDocument();
+        });
+    });
+});
+
+describe('Products - force modal render', async () => {
+    const { default: Products } = await import('../pages/Products');
+    it('renders add product modal', async () => {
+        m.getCategories.mockResolvedValue({ data: [{ id: 1, name: 'B' }] });
+        render(<W><Products /></W>);
+        await waitFor(() => { });
+        fireEvent.click(screen.getByText('Add Product'));
+        await waitFor(() => {
+            expect(screen.getByText('New Product')).toBeInTheDocument();
+            expect(screen.getByPlaceholderText('e.g. Cappuccino')).toBeInTheDocument();
+        });
+    });
+});
+
+describe('Users - force modal render', async () => {
+    const { default: Users } = await import('../pages/Users');
+    it('renders add staff modal', async () => {
+        render(<W><Users /></W>);
+        fireEvent.click(screen.getByText('Add Staff'));
+        await waitFor(() => {
+            expect(screen.getByText('Add Staff Member')).toBeInTheDocument();
+            expect(screen.getByPlaceholderText('John Doe')).toBeInTheDocument();
+            expect(screen.getByPlaceholderText('••••••••')).toBeInTheDocument();
+        });
+    });
+});
+
+describe('Categories - force modal render', async () => {
+    const { default: Categories } = await import('../pages/Categories');
+    it('renders add category modal', async () => {
+        render(<W><Categories /></W>);
+        await waitFor(() => { });
+        fireEvent.click(screen.getByText('Add Category'));
+        await waitFor(() => {
+            expect(screen.getByText('New Category')).toBeInTheDocument();
+            expect(screen.getByPlaceholderText('e.g. Hot Beverages')).toBeInTheDocument();
+        });
+    });
+});
